@@ -1,0 +1,17 @@
+/**
+ * Usage 
+ *  <script src="http://cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Converter.js"></script>
+ *  <textarea ng-model="markdown"></textarea>
+ *  <div markdown-previewer="markdown"></div>
+ */
+app.directive('markdownPreviewer', function () {
+  var converter = new Markdown.Converter();
+  return {
+    restrict: 'A',
+    link: function (scope, element, attrs) {
+      scope.$watch(attrs.markdown,    function() { 
+        element.html(converter.makeHtml(eval('scope.'+attrs.markdown)||''));
+      });
+    }
+  };
+})
