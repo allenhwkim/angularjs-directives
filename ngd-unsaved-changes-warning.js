@@ -1,27 +1,23 @@
 /**
- * <form ng-submit="yourSubmitMethod()" name="form" 
- *  unsaved-changes-warning="You have unsaved changes, \n\n Are you sure to leave this page?">
- *    <input name="foo" />
- *    <input type="submit" value="Submit" />
- * </form>
+ * show unsaved changes warning on the form if changed and not submitted
  */
-app.directive('unsavedChangesWarning', function($window) {
+app.directive('ngdUnsavedChangesWarning', function($window) {
   return {
     restrict: 'A',
     require: 'form', // we must require form to get access to formController
     link: function(scope, formElement, attrs, formController) {
-      console.log('formController', formController);
       var onSubmit = false;
       var confirmMessage = attrs.unsavedChangesWarning || "Are You Sure?";
       formElement.bind('submit', function() {
         onSubmit = true;
       });
-
+      
       scope.$on('$locationChangeStart', function(event) {
-        if (formController.$dirty && !$window.confirm(confirmMessage)) {
+        if (!onSubmit && formController.$dirty && !$window.confirm(confirmMessage)) {
           event.preventDefault(); 
         }
       });
     }
   };
 });
+
