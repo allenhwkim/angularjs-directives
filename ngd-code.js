@@ -1,7 +1,7 @@
 /**
  * builds the proper browser understanding code from human understanding code
   */
-NGD = NGD || angular.module('ngd',[]);
+var NGD = NGD || angular.module('ngd',[]);
 NGD.directive('ngdCode', function() {
   return {
     restrict: 'A',
