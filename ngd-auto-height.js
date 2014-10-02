@@ -9,7 +9,7 @@ NGD.directive('ngdAutoHeight', function() {
     link: function($scope, elem) {
       setTimeout( function() { // Expand the textarea as soon as it is added to the DOM
         if ( elem.val() ) {
-          var height = elem[0].scrollHeight + 2;
+          var height = elem[0].scrollHeight;
           elem.css({height:height+'px'});
         }
       }, 0);
