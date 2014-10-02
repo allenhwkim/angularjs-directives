@@ -126,15 +126,16 @@ NGD.directive('ngdPlnkrShow', ['$compile', '$timeout', function($compile, $timeo
     '  .tabs::after {display:table; content:""; clear:both}\n' +
     '  .tabs a {display:block; background:#ccc; float:left; padding: 5px; border:1px solid #333; border-bottom:none}\n' +
     '  .tabs a:not(:first-child) {border-left: none}\n' +
+    '  .tabs a.hide {display:none}\n' +
     '  .tabs a.active {background: #fff;}\n' +
     '  .tab-contents {border: 1px solid #333}\n' +
     '  .tab-contents * {width: 100%; white-space: pre; font:0.9em Courier New;}\n' +
     '</style>\n' +
     '<div>\n' +
     '  <div class="tabs" ng-init="tab=1">\n' +
-    '    <a ng-class="{active:tab==1}" ng-click="tab=1">HTML</a>\n' +
-    '    <a ng-class="{active:tab==2}" ng-click="tab=2">Script</a>\n' +
-    '    <a ng-class="{active:tab==3}" ng-click="tab=3">CSS</a>\n' +
+    '    <a ng-class="{active:tab==1,hide:!html}" ng-click="tab=1">HTML</a>\n' +
+    '    <a ng-class="{active:tab==2,hide:!js}" ng-click="tab=2">Script</a>\n' +
+    '    <a ng-class="{active:tab==3,hide:!css}" ng-click="tab=3">CSS</a>\n' +
     '    <a href="#" ngd-plnkr-edit>Edit</a>\n' +
     '  </div>\n' +
     '  <div class="tab-contents">\n' +
