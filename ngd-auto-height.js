@@ -5,7 +5,6 @@ var NGD = NGD || angular.module('ngd',[]);
 NGD.directive('ngdAutoHeight', function() {
   return {
     restrict: 'A',
-    //require: 'textarea', // we must require form to get access to formController
     link: function($scope, elem) {
       setTimeout( function() { // Expand the textarea as soon as it is added to the DOM
         if ( elem.val() ) {
@@ -16,4 +15,3 @@ NGD.directive('ngdAutoHeight', function() {
     }
   };
 });
-
