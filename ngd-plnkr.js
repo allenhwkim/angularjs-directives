@@ -13,14 +13,7 @@ NGD.directive('ngdPlnkrScope', function() {
         this.html = null;
         this.js = null;
         this.css = null;
-        this.libs = [
-          "http://maps.google.com/maps/api/js?sensor=false",
-          "http://code.angularjs.org/1.2.5/angular.js",
-          "http://rawgithub.com/allenhwkim/angularjs-google-maps" +
-             "/master/build/scripts/ng-map.min.js",
-          "script.js",
-          "style.css"
-        ];
+        this.libs = ["script.js", "style.css"];
         
         this.submitToPlnkr = function(postData) {
           var form = document.createElement('form');
