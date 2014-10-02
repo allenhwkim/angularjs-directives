@@ -38,7 +38,7 @@ NGD.directive('ngdPlnkrScope', function() {
           var contents = this.html;
           var js  = this.js||'';
           var css = this.css;
-          var appName = this.moduleName || "ngMap";
+          var appName = this.moduleName;
           js = js.replace(/,[ '"]*plunkr['"]?/,'');
       
           var headTags = [];
