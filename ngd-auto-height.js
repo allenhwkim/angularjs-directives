@@ -1,7 +1,8 @@
 /**
  * Set the height of textarea automatically by the height of contents
  */
-app.directive('ngdAutoHeight', function() {
+var NGD = NGD || angular.module('ngd',[]);
+NGD.directive('ngdAutoHeight', function() {
   return {
     restrict: 'A',
     //require: 'textarea', // we must require form to get access to formController
