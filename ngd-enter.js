@@ -1,7 +1,8 @@
 /**
  * use Enter Key pressed on element
  */
-app.directive('ngdEnter', function () {
+var NGD = NGD || angular.module('ngd', []);
+NGD.directive('ngdEnter', function () {
   return function (scope, element, attrs) {
     element.bind("keydown keypress", function (event) {
       if(event.which === 13) {
