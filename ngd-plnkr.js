@@ -122,7 +122,7 @@ NGD.directive('ngdPlnkrShow', ['$compile', '$timeout', function($compile, $timeo
     '  .tabs a.hide {display:none}\n' +
     '  .tabs a.active {background: #fff;}\n' +
     '  .tab-contents {border: 1px solid #333}\n' +
-    '  .tab-contents * {width: 100%; white-space: pre; font:0.9em Courier New;}\n' +
+    '  .tab-contents * {width: 100%; white-space: pre; font:0.9em Courier New; overflow:auto}\n' +
     '</style>\n' +
     '<div>\n' +
     '  <div class="tabs" ng-init="tab=1">\n' +

@@ -2,7 +2,7 @@
  * To show customized modal window on full document or a specific element
  * Usage :
  *    <div id="my-contents" style="width:400px; height: 150px; background:#ddd">
- *      block 1
+ *      Overlay will be shown on the top of this element
  *    </div>
  *    <div ngd-overlay="my-overlay" ngd-overlay-target="#my-contents" style="background:red;opacity:0.5">
  *      This is overlay

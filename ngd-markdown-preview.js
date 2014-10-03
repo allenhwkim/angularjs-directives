@@ -1,24 +1,33 @@
 /**
- * To preview markdown text as html
- * Usage 
- *  <script src="http://cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Converter.js"></script>
- *  <div markdown-preview="markdown"></div>
+ * Provides a service to preview markdown inside an element
+ *
+ * Example
+ *  &lt;script src="http://cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Converter.js">&lt;/script>
+ *  &lt;textarea ng-model="markdown">
+ *  Header
+ *  ======
+ *  **bold**
+ *  &lt;/textarea>
+ *  &lt;button ng-click="Markdown.preview(markdown, '#preview')">Preview&lt;button>
  */
-app.directive('markdownPreview', function () {
-  var MarkdownPreview = function(s, e, a) {
-    this.scope = s;
-    this.element = e;
-    this.attrs = a;
-    var converter = new Markdown.Converter();
-    this.run = function(markdown) {
-      this.element.html(converter.makeHtml(markdown)||'');
-    };
-    return this;
-  };
+var NGD = NGD || angular.module('ngd', []);
+NGD.service('Markdown', function() {
+  if (!Markdown.Converter) {
+    throw "no Markdown.Converter.js included. please add "+
+      "script tag with \"http://cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Converter.js\"";
+  }
   return {
-    restrict: 'A',
-    link: function (scope, element, attrs) {
-      scope.markdownPreview = new MarkdownPreview(scope, element, attrs);
+    preview: function(txt, selector) {
+      var converter = new Markdown.Converter();
+      var previewEl = document.querySelector(selector);
+      if (previewEl) {
+        var markdown = txt || '';
+        var html = converter.makeHtml(markdown);
+        angular.element(previewEl).html(html);
+      } else {
+        throw "no element by selector, "+ selector;
+      }
+
     }
-  };
+  }
 });
