@@ -1,24 +1,27 @@
 /**
- * To perform action when image is dragged on the document
+ * To perform action when image is dragged and dropped on and element
+ * You can drop image from your file browser as a file or web browser as a url
  */
-app.directive("ngdImageDrop", function ($parse) {
+var NGD = NGD || angular.module('ngd', []);
+NGD.directive("ngdImageDrop", ['$parse', function ($parse) {
   return {
     restrict: "A",
     link: function (scope, element, attrs) {
-      var onImageDrop = $parse(attrs.onImageDrop); 
+      var ngdImageDrop = $parse(attrs.ngdImageDrop); 
 
-      angular.element(document).bind("dragover", function (e) {
+      element.bind("dragover", function (e) {
         e.preventDefault();
-        angular.element(document.body).addClass("dragOver");
+        element.addClass("dragover");
       });
 
       element.bind("dragleave", function(e) {
         e.preventDefault();
-        angular.element(document.body).removeClass('dragOver');
-      }).bind("drop", function (e) {
+        angular.element(document.body).removeClass('dragover');
+      });
+      
+      element.bind("drop", function (e) {
         e.preventDefault();
-        console.log('e.dataTransfer.files', e.dataTransfer.files);
-        angular.element(document.body).removeClass('dragOver');
+        element.removeClass('dragover');
         var files = [];
         for (var i=0; i<e.dataTransfer.files.length; i++) {
           if (e.dataTransfer.files[i].type.match("image")) {
@@ -26,11 +29,19 @@ app.directive("ngdImageDrop", function ($parse) {
           }
         }
         if (files.length > 0) {
-          scope.$emit("imageDrop", files);
-          scope.$apply(onImageDrop(scope));
+          console.log('files', {files: files});
+          scope.$emit("ngd-image-dropped", {files: (files.length ? files : [files])});
+          scope.$apply(ngdImageDrop(scope));
+        }
+
+        var url = e.dataTransfer.getData('URL');
+        if (url.match(/\.(png|gif|jpg)$/)) {
+          console.log('url', {url: url});
+          scope.$emit("ngd-image-dropped", {url:url});
+          scope.$apply(ngdImageDrop(scope));
         }
       });
     }
   };
-});
+}]);
 

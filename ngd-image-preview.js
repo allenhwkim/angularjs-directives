@@ -1,41 +1,43 @@
 /**
  * To preview images by adding/removing image files from controller scope
  */
-app.directive("ngdImagePreview", function () {
-  var ImagePreview = function(s, e, a) {
-    this.scope = s;
-    this.element = e;
-    this.attrs = a;
-    this.images = [];
-    this.add = function(files) {
-      console.log('files', files);
-      var _this = this;
-      files = files.length ? files : [files];
-      console.log('files', files);
-      for (var i = 0; i< files.length; i++) {
-        var reader = new FileReader();
-        reader.onload = function(event) {
-          var image = new Image();
-          image.src = event.target.result;
-          image.width = 250;
-          if (_this.images.indexOf(image.src) == -1) {
-            _this.images.push(image.src);
-            _this.element[0].appendChild(image);
-          }
-        };
-        reader.readAsDataURL(files[i]);
-      };
-    };
-    this.clear = function() {
-      this.element.empty();
-    }
-    return this;
-  };
+var NGD  = NGD || angular.module('ngd', []);
+NGD.directive("ngdImagePreview", function() {
   return {
     restrict: "A",
     link: function (scope, element, attrs) {
-      scope.imagePreview = new ImagePreview(scope, element, attrs);
+      scope.$on('ngd-image-dropped', function(event, options) {
+        var getImage = function(src) {
+          var width = attrs.ngdImagePreviewWidth;
+          var height = attrs.ngdImagePreiewHeight;
+          var image = new Image();
+          image.src = src;
+          width && (image.width = width);
+          height && (image.height = height);
+          return image;
+        }
+        var fileOnLoad = function(event) {
+          var image = getImage(event.target.result);
+          var imgEl = element[0].querySelector("img[src=\""+event.target.result+"\"]");
+          if (!imgEl) {
+            element[0].appendChild(image);
+          }
+        };
+        if (options.files) {
+          for (var i = 0; i< options.files.length; i++) {
+            var file = options.files[i];
+            var fileReader = new FileReader();
+            fileReader.onload = fileOnLoad;
+            fileReader.readAsDataURL(file);
+          }
+        } else if (options.url) {
+          var imgEl = element[0].querySelector("img[src=\""+options.url+"\"]");
+          if (!imgEl) {
+            var image = getImage(options.url);
+            element[0].appendChild(image);
+          }
+        }
+      });
     } // link
   }; // return
 });
-
