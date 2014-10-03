@@ -22,7 +22,7 @@ Provides a service, called `Markdown`, to preview markdown text inside an elemen
          "Header\n" +
          "======\n"+
          "**bold**\n"+
-         "markdown text goes here\n";
+         "press preview button, or enter text in the right-side textarea\n";
     };
   </script>
   <div ngd-plnkr-code="html">
@@ -32,6 +32,9 @@ Provides a service, called `Markdown`, to preview markdown text inside an elemen
        <button ng-click="Markdown.preview(markdown, '#preview')">
          Preview
        </button>
+       <textarea ng-model="markdown" rows="4" cols="50"
+         ng-keydown="Markdown.preview(markdown, '#preview')">
+       </textarea>
        <div id="preview">
        Markdown will be previewed here.
        </div>

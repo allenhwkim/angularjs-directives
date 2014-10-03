@@ -123,6 +123,9 @@ aside#sidebar ul {
   list-style: none;
   padding-left: 10px;
 }
+aside#sidebar ul ul {
+  margin-bottom: 0px;
+}
 
 #downloads {
   margin-bottom: 40px;
