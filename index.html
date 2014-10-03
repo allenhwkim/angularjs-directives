@@ -21,10 +21,11 @@
     <script src="app/ngd-plnkr.js"></script>
     <script src="app/ngd-auto-height.js"></script>
     <script src="app/ngd-enter.js"></script>
+    <script src="app/ngd-sidebar-below.js"></script>
     <script src="app/ngd-image-drop.js"></script>
     <script src="app/ngd-image-paste.js"></script>
     <script src="app/ngd-image-preview.js"></script>
-    <script src="app/ngd-sticky-sidebar-below.js"></script>
+    <script src="app/ngd-markdown-preview.js"></script>
     <!-- endbuild -->
 
   </head>
@@ -38,7 +39,7 @@
       </div>
     </header>
 
-    <aside id="sidebar" ngd-sticky-sidebar-below="header">
+    <aside id="sidebar" ngd-sidebar-below="header">
       <a href="https://github.com/allenhwkim/angularjs-directives/zipball/master" class="button">
         <small>Download</small>
         .zip file
@@ -51,9 +52,20 @@
       <p>
         Collections are;
         <ul>
-          <li><a href="##ngd-code" ngd-a>ngd-code</a>
+          <li><a href="##ngd-code">ngd-code</a>
           <li><a href="##ngd-auto-height" ngd-a>ngd-auto-height</a>
-          <li><a href="##ngd-enter" ngd-a>ngd-enter</a>
+          <li><a href="##ngd-enter">ngd-enter</a>
+          <li><a href="##ngd-sidebar-below">ngd-sidebar-below</a>
+          <li>ngd-image-*
+            <ul>
+              <li><a href="##ngd-image-drop">ngd-image-drop</a>
+              <li><a href="##ngd-image-paste">ngd-image-paste</a>
+              <li><a href="##ngd-image-preview">ngd-image-preview</a>
+              <li><a href="##ngd-image-preview-width">ngd-image-preview-width</a>
+              <li><a href="##ngd-image-preview-height">ngd-image-preview-height</a>
+            </ul>
+          </li>
+          <li><a href="##ngd-markdown-preview">ngd-markdown-preview</a>
         </ul>
       </p>
 
@@ -87,10 +99,25 @@
           <div ng-include="'ngd-code.html'"></div>
           <div ng-include="'ngd-auto-height.html'"></div>
           <div ng-include="'ngd-enter.html'"></div>
+          <div ng-include="'ngd-sidebar-below.html'"></div>
           <div ng-include="'ngd-image-drop.html'"></div>
+          <div ng-include="'ngd-image-preview.html'"></div>
           <div ng-include="'ngd-image-paste.html'"></div>
+          <div ng-include="'ngd-markdown-preview.html'"></div>
         </section>
 
+  <!-- need to add this script again that are in partials to make this page work -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Converter.js"></script>
+  <script>
+    NGD.controller('MyCtrl', function($scope, Markdown){
+      $scope.Markdown = Markdown;
+      $scope.markdown = ""+
+         "Header\n" +
+         "======\n"+
+         "**bold**\n"+
+         "markdown text goes here\n";
+    });
+  </script>
       </div>
     </div>
 

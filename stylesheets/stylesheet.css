@@ -83,7 +83,6 @@ header h1 {
 header h2 {
   font-size: 26px;
   color: #9ddcff;
-  font-weight: normal;
   line-height: 1.3;
   width: 540px;
   letter-spacing: 0;
@@ -119,6 +118,10 @@ aside#sidebar {
 aside#sidebar p.repo-owner,
 aside#sidebar p.repo-owner a {
   font-weight: bold;
+}
+aside#sidebar ul {
+  list-style: none;
+  padding-left: 10px;
 }
 
 #downloads {
@@ -247,6 +250,11 @@ form {
   padding-right: 0.3em;
   margin-left: -1.5em;
 }
+
+#main-content h2 a[download] {
+  font-weight: normal;
+  font-size: 12px;
+} 
 
 #main-content h3 {
   font-family: 'Helvetica Neue', Helvetica, Arial, serif;

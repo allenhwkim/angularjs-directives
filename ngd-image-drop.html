@@ -1,0 +1,46 @@
+<a id="ngd-image-drop"></a> 
+<h2>
+  ngd-image-drop
+  <a href="https://rawgit.com/allenhwkim/angularjs-directives/master/ngd-image-drop.js" download="ngd-image-drop.js">Download</a>
+</h2>
+
+<p>
+  Enable to show image drag and drop from a file browser or a web browser
+  <br/> Whenever drops an image it, broadcasts an event, "ngd-image-dropped" with options, and options are;
+  <ul>
+    <li> {files: &lt;&lt;Files Dropped>>}
+    <li> or, {url: &lt;&lt;URL of an image>>}
+  </ul>
+  The event broadcasted are used by "ngd-image-preview" directive. For example;
+  <pre><code ngd-code>
+     scope.$on('ngd-image-dropped', function(event, options) {
+      ....
+     });
+  </code></pre>
+
+  It also add a class when images are dragging. The class name is "dragover".
+  The class, "dragover", will be removed when images are dropped.
+</p>
+
+<h3>Example</h3>
+<div ngd-plnkr-scope>
+  <div ngd-plnkr-lib src="http://code.angularjs.org/1.2.5/angular.js"></div>
+  <div ngd-plnkr-lib src="https://rawgit.com/allenhwkim/angularjs-directives/master/ngd-image-drop.js"></div>
+  <div ngd-plnkr-lib src="https://rawgit.com/allenhwkim/angularjs-directives/master/ngd-image-preview.js"></div>
+  <div ngd-plnkr-show module-name="ngd"></div>
+  <style ngd-plnkr-code="css">
+    *[ngd-image-drop] {
+      color: #fff; width:400px; min-height: 200px; background: grey
+    }
+    *[ngd-image-drop].dragover {
+      color: grey; background: #fff; border: 1px solid #333;
+    }
+  </style>
+  <div ngd-plnkr-code="html">
+    <div ngd-image-drop 
+      ngd-image-preview 
+      ngd-image-preview-width="100">
+      Drag Image Here
+    </div>
+  </div>
+</div>
