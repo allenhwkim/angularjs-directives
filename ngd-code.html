@@ -1,0 +1,47 @@
+<a id="ngd-code"></a> 
+<h2>ngd-code</h2>
+<a href="https://rawgit.com/allenhwkim/angularjs-directives/master/ngd-code.js" download="ngd-code.js">Download</a>
+
+<p>
+We want to type code and show to the users. However, &ltpre> tags cares every single space and does
+not care about your indentation for your html and ends up showing ugly. If you want to make it look
+pretty to the user, your html indentation must be ignored.<br/>
+<br/>
+"ng-code" does read your html &lt;code>, which id indented properly, and converts it to 
+user-friendly non-indented code.
+</p>
+
+<p>
+"ngd-code" does prettify your code by removing;
+   <ol>
+     <li> The first line feed
+     <li> The last line feed
+     <li> All html indentation, not code indentation, of all lines
+   </ol>
+</p>
+
+<h3>Example</h3>
+<div ngd-plnkr-scope>
+  <div ngd-plnkr-lib src="http://code.angularjs.org/1.2.5/angular.js" />
+  <div ngd-plnkr-lib src="https://rawgit.com/allenhwkim/angularjs-directives/master/ngd-code.js" />
+  <div ngd-plnkr-show module-name="ngd"></div>
+  <div ngd-plnkr-code="html">
+                        Without ngd-code
+                        <pre style="background-color:#ccc"><code>
+                          foo
+                            indent1
+                              more indent
+                            /indent1
+                          /foo
+                        </code></pre>
+
+                        With ngd-code
+                        <pre style="background-color:#ccc"><code ngd-code>
+                          foo
+                            indent1
+                              more indent
+                            /indent1
+                          /foo
+                        </code></pre>
+  </div>
+</div>
