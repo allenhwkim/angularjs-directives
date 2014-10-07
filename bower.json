@@ -1,14 +1,15 @@
 {
-  "name": "angularjs-directives",
+  "name": "ngd",
   "version": "0.1.0",
   "homepage": "https://github.com/allenhwkim/angularjs-directives",
   "authors": [
     "Allen Kim <allenhwkim@gmail.com>"
   ],
-  "description": "Collection of AngularJS Directives",
+  "description": "angularjs directives",
+  "main": "build/ngd.js",
   "keywords": [
-    "angularjs",
-    "directives"
+    "angualr",
+    "directive"
   ],
   "license": "MIT",
   "ignore": [
