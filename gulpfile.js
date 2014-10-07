@@ -1,3 +1,4 @@
+var fs = require('fs');
 var gulp = require('gulp');
 var rename = require('gulp-rename');
 var gutil = require('gulp-util');
@@ -35,7 +36,7 @@ gulp.task('bump:major', ['build'], function() { bumpVersion('major'); });
 
 gulp.task('copy', function() {
   return gulp.src('./development/index.html')
-    .pipe(gulp.dest('./index.html'));
+    .pipe(gulp.dest('.'));
 });
 
 gulp.task('build-html', function() {
@@ -47,12 +48,16 @@ gulp.task('build-html', function() {
       }
     ))
     .pipe(replace(
-      /\s+<[^ ]+ ng-include="'([^']+)'"><\/[^>]+>/gm,
-      function(match, fileName) {
-        return '<!-- ' + match + '-->';
+      /^[ \t]+<[^ ]+ ng-include="'([^']+)'"><\/[^>]+>/gm,
+      function(match, $1) {
+        var code = fs.readFileSync("./development/"+$1);
+        return "<!-- " + match.replace(/./g, "=")  + " -->\n" +
+               "<!-- " + match + " -->\n" +
+               "<!-- " + match.replace(/./g, "=")  + " -->\n" +
+               code;
       }
     ))
-    .pipe(gulp.dest('./index.html'));
+    .pipe(gulp.dest('.'));
 });
 
 gulp.task('build', function(callback) {
