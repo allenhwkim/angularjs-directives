@@ -46,9 +46,9 @@ There are following directives that are used as attributes as part of `ngd-viewp
 <h3>Example</h3>
 <div ngd-plnkr-scope>
   <div ngd-plnkr-lib src="http://code.angularjs.org/1.2.5/angular.js" />
-  <div ngd-plnkr-lib src="https://rawgit.com/allenhwkim/angularjs-directives/master/ngd-overlay.js" />
+  <div ngd-plnkr-lib src="https://rawgit.com/allenhwkim/angularjs-directives/master/ngd-viewport.js" />
   <div ngd-plnkr-show module-name="ngd"></div>
-  <script ngd-plnkr-code="css">
+  <script type="text/plain" ngd-plnkr-code="css">
     #ngd-viewport {display:inline-block; width:40%; height:200px; overflow:auto; border: 1px solid #333}
     #ngd-viewport div {height: 110px;}
     #ngd-viewport div.odd {background:#333; color: #fff}
@@ -56,11 +56,8 @@ There are following directives that are used as attributes as part of `ngd-viewp
     #ngd-viewport-nav .active { background: #333; color: #fff}
   </script>
   <script ngd-plnkr-code="html">
-    <div id="ngd-viewport-nav"
-      ngd-viewport-nav="a[href]"
-      ngd-viewport-nav-class="active">
-      <a ng-repeat="no in [1,2,3,4,5,6,7,8,9,10]"
-        href="#nav-section-{{no}}"> section {{no}} <br/> </a>
+    <div id="ngd-viewport-nav" ngd-viewport-nav="a[href]" ngd-viewport-nav-class="active">
+      <a ng-repeat="no in [1,2,3,4,5,6,7,8,9,10]" href="#nav-section-{{no}}"> section {{no}} <br/> </a>
     </div>
     
     <div id="ngd-viewport" ngd-viewport="div[ngd-viewport-el]">
