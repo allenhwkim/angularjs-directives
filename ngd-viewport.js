@@ -59,7 +59,6 @@ NGD.directive('ngdViewport', ['$window', 'NgdViewport',
         }
         NgdViewport.selectorToSpy = attrs.ngdViewport || "a[id]";
         var matches = NgdViewport.selectorToSpy.match(/\[(.*)\]/);
-        console.log(1, NgdViewport.selectorToSpy);
         NgdViewport.attrToSpy = matches[1];
         var elementsToSpy = element[0].querySelectorAll(NgdViewport.selectorToSpy);
         for (var i=0; i<elementsToSpy.length; i++) {

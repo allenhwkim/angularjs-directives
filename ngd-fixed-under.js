@@ -1,13 +1,13 @@
 /**
- * Set top position below the given element
+ * Set top position under the given element
  */
 var NGD = NGD || angular.module('ngd',[]);
 
-NGD.directive('ngdSidebarBelow', function($window) {
+NGD.directive('ngdFixedUnder', function($window) {
   return {
     restrict: 'A',
     link: function($scope, element, attrs) {
-      var header = document.querySelector(attrs.ngdSidebarBelow);
+      var header = document.querySelector(attrs.ngdFixedUnder);
       if (header) {
         angular.element($window).bind('scroll', function() {
           var rect = header.getBoundingClientRect();
@@ -18,7 +18,7 @@ NGD.directive('ngdSidebarBelow', function($window) {
           }
         });
       } else {
-        throw "ngd-sidebar-below, no element found by value";
+        throw "ngd-fixed-under, no element found by value";
       } // if
     } // link
   }; // return

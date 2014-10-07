@@ -63,6 +63,60 @@ NGD.directive('ngdEnter', ['$parse', '$rootScope', function ($parse, $rootScope)
 }]);
 
 /**
+ * Set top position under the given element
+ */
+var NGD = NGD || angular.module('ngd',[]);
+
+NGD.directive('ngdFixedUnder', function($window) {
+  return {
+    restrict: 'A',
+    link: function($scope, element, attrs) {
+      var header = document.querySelector(attrs.ngdFixedUnder);
+      if (header) {
+        angular.element($window).bind('scroll', function() {
+          var rect = header.getBoundingClientRect();
+          if (parseFloat(rect.bottom)<0) {
+            element.css({position:'fixed', top: 0});
+          } else {
+            element.css({position:'absolute', top: null});
+          }
+        });
+      } else {
+        throw "ngd-fixed-under, no element found by value";
+      } // if
+    } // link
+  }; // return
+});
+
+/**
+ * show unsaved changes warning on the form if changed and not submitted
+ */
+var NGD = NGD || angular.module('ngd', []);
+NGD.directive('ngdFormUnsaved', function($window, $parse) {
+  return {
+    restrict: 'A',
+    require: 'form', // we must require form to get access to formController
+    link: function(scope, formElement, attrs, formController) {
+      /** 
+       * when form is submitted, set onSubmit flag, so that no warning to show up
+       */
+      formElement.bind('submit', function() {
+        formController.onSubmit = true;
+      });
+      var prevHandler = $window.onbeforeunload;
+      var onbeforeunloadFunc = function(event) {
+        event.preventDefault();
+        prevHandler && prevHandler(event);
+        if (!formController.onSubmit && formController.$dirty) {
+          return attrs.ngdFormUnsaved || "Are You Sure?";
+        } 
+      }
+      $window.onbeforeunload = onbeforeunloadFunc;
+    } // link
+  };
+});
+
+/**
  * To perform action when image is dragged and dropped on and element
  * You can drop image from your file browser as a file or web browser as a url
  */
@@ -506,57 +560,6 @@ NGD.directive('ngdPlnkrShow', ['$compile', '$timeout', function($compile, $timeo
   };
 }]); 
 
-/**
- * Set top position below the given element
- */
-var NGD = NGD || angular.module('ngd',[]);
-
-NGD.directive('ngdSidebarBelow', function($window) {
-  return {
-    restrict: 'A',
-    link: function($scope, element, attrs) {
-      var header = document.querySelector(attrs.ngdSidebarBelow);
-      if (header) {
-        angular.element($window).bind('scroll', function() {
-          var rect = header.getBoundingClientRect();
-          if (parseFloat(rect.bottom)<0) {
-            element.css({position:'fixed', top: 0});
-          } else {
-            element.css({position:'absolute', top: null});
-          }
-        });
-      } else {
-        throw "ngd-sidebar-below, no element found by value";
-      } // if
-    } // link
-  }; // return
-});
-
-/**
- * show unsaved changes warning on the form if changed and not submitted
- */
-var NGD = NGD || angular.module('ngd', []);
-NGD.directive('ngdUnsavedChangesWarning', function($window) {
-  return {
-    restrict: 'A',
-    require: 'form', // we must require form to get access to formController
-    link: function(scope, formElement, attrs, formController) {
-      var onSubmit = false;
-      var confirmMessage = attrs.unsavedChangesWarning || "Are You Sure?";
-      formElement.bind('submit', function() {
-        onSubmit = true;
-      });
-      
-      scope.$on('$locationChangeStart', function(event) {
-        if (!onSubmit && formController.$dirty && !$window.confirm(confirmMessage)) {
-          event.preventDefault(); 
-        }
-      });
-    }
-  };
-});
-
-
 /* global jQuery */
 var NGD= NGD|| angular.module('ngd', []);
 NGD.camelCase = NGD.camelCase || function(name) {
@@ -618,7 +621,6 @@ NGD.directive('ngdViewport', ['$window', 'NgdViewport',
         }
         NgdViewport.selectorToSpy = attrs.ngdViewport || "a[id]";
         var matches = NgdViewport.selectorToSpy.match(/\[(.*)\]/);
-        console.log(1, NgdViewport.selectorToSpy);
         NgdViewport.attrToSpy = matches[1];
         var elementsToSpy = element[0].querySelectorAll(NgdViewport.selectorToSpy);
         for (var i=0; i<elementsToSpy.length; i++) {
