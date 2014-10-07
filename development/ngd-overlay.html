@@ -1,0 +1,74 @@
+<a id="ngd-overlay" ngd-viewport-el></a> 
+<h2>
+  ngd-overlay
+  <a href="https://rawgit.com/allenhwkim/angularjs-directives/master/ngd-overlay.js" download="ngd-overlay.js">Download</a>
+</h2>
+
+<p>
+To show fully customized overlay element on;
+<ul>
+  <li> full document as a modal window
+  <li> or, on a specific element
+</ul>
+
+The default css will be applied on background and contents as;
+<pre><code ngd-code>
+/* For background */
+{
+  background:rgba(0,0,0,0.5);
+}
+
+/* For contents */
+{
+  background:#fff;
+  display:inline-block;
+  position:absolute;
+  text-align: center;
+}
+</code></pre>
+
+NOTE: <br/>
+To use this directive with `ng-include`, please remind that `ng-include` has its own scope.
+Since `ng-include` has isolated scope, any events, i.e. click, search for its own scope first.
+Thus, do not use variable directly for the event if intended scope is not ng-include itself.
+<pre>
+i.e. 
+  NO:  ng-click="count = count +1" // increase count within ng-include scope
+  YES: ng-clicl="increase(+1)      // call method increase by searching current scope and up.
+</pre>
+
+<a id="ngd-overlay-nocss"></a>
+To override this default css;
+<ul>
+  <li> `!important` at the end of each attribute,
+  <li> or, just simply apply `ngd-overlay-nocss`. With `*-nocss`, no inline css will be applied.
+      <pre><code ngd-code>
+        &lt;div ngd-overlay="foo" ngd-overlay-nocss>Overlay&lt;/div>
+      </code></pre>
+</ul>
+
+<h3>Example</h3>
+<div ngd-plnkr-scope>
+  <div ngd-plnkr-lib src="http://code.angularjs.org/1.2.5/angular.js" />
+  <div ngd-plnkr-lib src="https://rawgit.com/allenhwkim/angularjs-directives/master/ngd-overlay.js" />
+  <div ngd-plnkr-show module-name="ngd"></div>
+  <style ngd-plnkr-code="css">
+    #target1 {width:400px; height: 150px; background:#ddd}
+  </style>
+  <div ngd-plnkr-code="html">
+    <div id="target1">
+      #target
+    </div>
+    ngd-overlay `foo1`  is here as hidden<br/>
+    <div ngd-overlay="foo1" ng-click="ngdOverlay.hide('foo1')">
+      Overlay on the top of an element<br/>
+      Click Yes to increase count, No to decrease<br/>
+      <button ng-click="count = count + 1">Yes</button>
+      <button ng-click="count = count - 1">No</button>
+    </div>
+    count : {{count}} <br/>
+    <button ng-click="ngdOverlay.show('foo1', '#target1')">Show overlay foo1 on #target1</button>
+    <button ng-click="ngdOverlay.show('foo1', 'body')">Show overlay foo1 as modal window</button>
+    <br/>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+<a id="ngd-viewport" ngd-viewport-el></a> 
+<h2>
+  ngd-viewport
+  <a href="https://rawgit.com/allenhwkim/angularjs-directives/master/ngd-viewport.js" download="ngd-viewport.js">Download</a>
+</h2>
+
+<p>
+This directive, `ng-viewport`, watches scroll event of window and
+set the first element in the viewport to `NgViewport.currentEl`.
+Another directive `ng-viewport-nav` watches the changes of `NgViewprot.currentEl`,
+and set the corresponding element in the navigatior section
+<br/>
+<br/>
+There are following directives that are used as attributes as part of `ngd-viewport`;
+<ul>
+  <li><h3>ngd-viewport</h3>
+    <ul>
+      <li>Collect all elements that matches the given selector, store it to "NgdViewpot.elements".
+      <li>Watch the scroll of the element, and set the first element in the current viewport to "NgdViewport.currentEl". 
+    </ul>
+    The value of this attribute is a css selector, and the element must have an id.
+    The default value is 'a[id]'.
+  <li><a id="ngd-viewport-el"></a>
+    <h3>ngd-viewport-el</h3>
+    Only used when `ngd-viewport` section is dynamically updated, i.e., `ng-repeat`.
+    `ng-viewport` directive does not watch the changes of inner html.
+    When inner httml of `ngd-viewport` is dynamically updated, you need to update it
+    with `ngd-viewport-el` so that "NgdViewport.elements" are updated.
+  </li>
+  <li><a id="ngd-viewport-nav"></a>
+    <h3>ngd-viewport-nav</h3>
+    <ul>
+      <li>Collect all elements that matches the given selector.
+      <li>Watch the change of  "NgdViewport.currentEl", and set the class name to the matching navigation element. 
+    </ul>
+    The class name is "active" by default, but you can change it with `ngd-viewport-nav-class` attribute.
+    The value of this directive is a css selector, and the selector must be attribute specific.
+    The attribute value of the given selector is compared to the id of the viewport element selected, "NgdViewport.currentEl".
+    Th default value is 'a[href]'
+  </li>
+  <li><a id="ngd-viewport-nav-class"></a>
+    <h3>ngd-viewport-class</h3>
+    Defines class name used by `ngd-viewport-nav`. Default, "active"
+</ul>
+
+<h3>Example</h3>
+<div ngd-plnkr-scope>
+  <div ngd-plnkr-lib src="http://code.angularjs.org/1.2.5/angular.js" />
+  <div ngd-plnkr-lib src="https://rawgit.com/allenhwkim/angularjs-directives/master/ngd-overlay.js" />
+  <div ngd-plnkr-show module-name="ngd"></div>
+  <script ngd-plnkr-code="css">
+    #ngd-viewport {display:inline-block; width:40%; height:200px; overflow:auto; border: 1px solid #333}
+    #ngd-viewport div {height: 110px;}
+    #ngd-viewport div.odd {background:#333; color: #fff}
+    #ngd-viewport-nav {display:inline-block; width:40%; height: 200px}
+    #ngd-viewport-nav .active { background: #333; color: #fff}
+  </script>
+  <script ngd-plnkr-code="html">
+    <div id="ngd-viewport-nav"
+      ngd-viewport-nav="a[href]"
+      ngd-viewport-nav-class="active">
+      <a ng-repeat="no in [1,2,3,4,5,6,7,8,9,10]"
+        href="#nav-section-{{no}}"> section {{no}} <br/> </a>
+    </div>
+    
+    <div id="ngd-viewport" ngd-viewport="div[ngd-viewport-el]">
+      <div ng-repeat="no in [1,2,3,4,5,6,7,8,9,10]" ng-class-odd="'odd'"
+        ngd-viewport-el="nav-section-{{no}}">
+        Section {{no}}
+      </div>
+    </div>
+  </script>
+</div>

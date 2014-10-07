@@ -1,0 +1,29 @@
+<a id="ngd-markdown" ngd-viewport-el></a> 
+<h2>
+  ngd-markdown
+  <a href="https://rawgit.com/allenhwkim/angularjs-directives/master/ngd-markdown.js" download="ngd-markdown.js">Download</a>
+</h2>
+
+<p>
+Provides a method called ngdMarkdown#show to the scope to preview markdown text inside an element
+</p>
+
+<h3>Example</h3>
+<!-- plnkr: http://plnkr.co/edit/YaIPKqaLUAK5oKUHNBqw?p=preview -->
+<div ngd-plnkr-scope>
+  <div ngd-plnkr-lib src="http://code.angularjs.org/1.2.5/angular.js" />
+  <div src="http://cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Converter.js"></div>
+  <div ngd-plnkr-lib src="https://rawgit.com/allenhwkim/angularjs-directives/master/ngd-markdown-preview.js" />
+  <div ngd-plnkr-show></div>
+  <div ngd-plnkr-code="html">
+    <div ng-init="markdown='Header\n======\nenter text to preview'">
+       <textarea ng-model="markdown" rows="4" cols="50"
+         ng-keydown="ngdMarkdown.preview('foo', markdown)">
+       </textarea>
+       <div ngd-markdown="foo">
+         Markdown will be previewed here.
+       </div>
+    </div>
+   </div>
+  </div>
+</div>
