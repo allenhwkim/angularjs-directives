@@ -1,7 +1,8 @@
 /**
  * show unsaved changes warning on the form if changed and not submitted
  */
-app.directive('ngdUnsavedChangesWarning', function($window) {
+var NGD = NGD || angular.module('ngd', []);
+NGD.directive('ngdUnsavedChangesWarning', function($window) {
   return {
     restrict: 'A',
     require: 'form', // we must require form to get access to formController

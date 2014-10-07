@@ -67,8 +67,14 @@ gulp.task('docs', shell.task([
     '-r ./ngd-*.js' 
 ]));
 
+gulp.task('copy', function() {
+  return gulp.src('./build/ngd*')
+    .pipe(gulp.dest('../gh-pages/javascripts'))
+    .on("error", gutil.log);
+});
+
 gulp.task('build', function(callback) {
-  runSequence('clean', 'build-js', callback);
+  runSequence('clean', 'build-js', 'copy', callback);
 });
 
 gulp.task('test', shell.task([
