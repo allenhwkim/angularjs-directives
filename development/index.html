@@ -22,13 +22,14 @@
     <script src="app/ngd-plnkr.js"></script>
     <script src="app/ngd-auto-height.js"></script>
     <script src="app/ngd-enter.js"></script>
-    <script src="app/ngd-sidebar-below.js"></script>
+    <script src="app/ngd-fixed-under.js"></script>
     <script src="app/ngd-image-drop.js"></script>
     <script src="app/ngd-image-paste.js"></script>
     <script src="app/ngd-image-preview.js"></script>
     <script src="app/ngd-markdown.js"></script>
     <script src="app/ngd-overlay.js"></script>
     <script src="app/ngd-viewport.js"></script>
+    <script src="app/ngd-form-unsaved.js"></script>
     <!-- endbuild -->
 
   </head>
@@ -42,7 +43,7 @@
       </div>
     </header>
 
-    <aside id="sidebar" ngd-sidebar-below="header">
+    <aside id="sidebar" ngd-fixed-under="header">
       <a href="https://rawgit.com/allenhwkim/angularjs-directives/master/build/ngd.min.js" download="ngd.min.js" class="button">
         <small>Download</small>
         ngd.min.js 
@@ -54,7 +55,7 @@
           <li><a href="#ngd-code">ngd-code</a></li>
           <li><a href="#ngd-auto-height" ngd-a>ngd-auto-height</a></li>
           <li><a href="#ngd-enter">ngd-enter</a></li>
-          <li><a href="#ngd-sidebar-below">ngd-sidebar-below</a></li>
+          <li><a href="#ngd-fixed-under">ngd-fixed-under</a></li>
           <li>ngd-image-*
             <ul>
               <li><a href="#ngd-image-drop">ngd-image-drop</a></li>
@@ -73,6 +74,7 @@
               <li><a href="#ngd-viewport-el">ngd-viewport-el</a></li>
             </ul>
           </li>
+          <li><a href="#ngd-form-unsaved">ngd-form-unsaved</a></li>
         </ul>
       </p>
 
@@ -106,13 +108,14 @@
           <div ng-include="'ngd-code.html'"></div>
           <div ng-include="'ngd-auto-height.html'"></div>
           <div ng-include="'ngd-enter.html'"></div>
-          <div ng-include="'ngd-sidebar-below.html'"></div>
+          <div ng-include="'ngd-fixed-under.html'"></div>
           <div ng-include="'ngd-image-drop.html'"></div>
           <div ng-include="'ngd-image-preview.html'"></div>
           <div ng-include="'ngd-image-paste.html'"></div>
           <div ng-include="'ngd-markdown.html'"></div>
           <div ng-include="'ngd-overlay.html'"></div>
           <div ng-include="'ngd-viewport.html'"></div>
+          <div ng-include="'ngd-form-unsaved.html'"></div>
         </section>
 
         <!-- need to add this script that are in partials to make this page work -->

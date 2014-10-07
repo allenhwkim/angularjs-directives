@@ -242,18 +242,21 @@ form {
 
 #main-content h2 {
   font-family: 'Helvetica Neue', Helvetica, Arial, serif;
-  font-size: 22px;
+  font-size: 2em;
   font-weight: bold;
-  margin: 8px;
   color: #fff;
-  background: #3877b8;
-  padding-left: 10px
+  padding-left: 1em;
+  margin-top: 2em;
+  background: linear-gradient(#5897d8, #3877b8);
+  margin-bottom: 1em;
+  border: 1px solid #fff;
+  border-radius: 10px;
 }
-#main-content h2:before {
-  content: "//";
-  color: #9ddcff;
-  padding-right: 0.3em;
-  margin-left: -1.5em;
+#main-content h2:first-child {
+  background: #fff;
+  color: #666;
+  padding-left: 0;
+  margin-top: 0;
 }
 
 #main-content h2 a[download] {
