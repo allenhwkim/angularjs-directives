@@ -57,6 +57,7 @@ gulp.task('build-html', function() {
                code;
       }
     ))
+    .pipe(replace(/href="##/g, 'href="#'))
     .pipe(gulp.dest('.'));
 });
 

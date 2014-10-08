@@ -16,7 +16,7 @@
     <script src="http://code.angularjs.org/1.2.5/angular.js"></script>
 
     <script src="javascripts/ngd.js"></script>
-
+    <script src="javascripts/ngdPlnkr.js"></script>
   </head>
 
   <body ngd-viewport>
@@ -30,12 +30,11 @@
 
     <aside id="sidebar" ngd-fixed-under="header">
       <a href="https://rawgit.com/allenhwkim/angularjs-directives/master/build/ngd.min.js" download="ngd.min.js" class="button">
-        <small>Download</small>
-        ngd.min.js 
+        <small>Download (7.8k)</small>
+        ngd.min.js
       </a>
 
       <p>
-        Collections are;
         <ul ngd-viewport-nav>
           <li><a href="#ngd-code">ngd-code</a></li>
           <li><a href="#ngd-auto-height" ngd-a>ngd-auto-height</a></li>
@@ -71,25 +70,33 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <h2> Welcome to Collection of AngularJs Directives, 'ngd-*'. </h2>
+          <h2> Collection of AngularJs Directives, 'ngd-*'. </h2>
 
           <p>
             Directives are very essential part in AngularJs, and we don't want to include so many 
             javascripts page by page for each directive. This collection provides you to include 
-            only one script file ngd.min.js for full benefit of all directives:
+            only one script file ngd.min.js for full benefit of all directives;
+            <ul class="toc">
+              <li><a href="#ngd-code">ngd-code</a> auto fixing indentation for your code</li>
+              <li><a href="#ngd-auto-height" ngd-a>ngd-auto-height</a> auto height adjustment for textarea</li>
+              <li><a href="#ngd-enter">ngd-enter</a> listener for ENTER key</li>
+              <li><a href="#ngd-fixed-under">ngd-fixed-under</a> fixed navibation bar under a header</li>
+              <li><a href="#ngd-image-drop">ngd-image-drop</a> image drag and drop</li>
+              <li><a href="#ngd-image-paste">ngd-image-paste</a> image copy and paste</li>
+              <li><a href="#ngd-markdown">ngd-markdown</a> markdown previewer</li>
+              <li><a href="#ngd-overlay">ngd-overlay</a> modal blocker for any element</li>
+              <li><a href="#ngd-viewport">ngd-viewport</a> navigation tracking for current viewport</li>
+              <li><a href="#ngd-form-unsaved">ngd-form-unsaved</a> warning message when form not saved</li>
+            </ul>
           </p>
 
-          <p>
-            To use this in your app, simply include javascript
-            <pre><code ngd-code>
-              &lt;script src="ngd.js">&lt;/script>
-            </code></pre>
-            and, ngd module
-            <pre><code ngd-code>
-              var myApp = angular.module('myApp', ['ngd']);
-            </code></pre>
-          </p>
-
+          To use this in your app, simply include javascript <pre><code ngd-code>
+            &lt;script src="ngd.js">&lt;/script>
+          </code></pre>
+          optionally, for your app, include ngd module <pre><code ngd-code>
+            var myApp = angular.module('myApp', ['ngd']);
+          </code></pre>
+          NOTE: This page only uses "ngd" directive with no app, controller, nor jQuery.
 <!-- ================================================== -->
 <!--           <div ng-include="'ngd-code.html'"></div> -->
 <!-- ================================================== -->
@@ -314,7 +321,7 @@ When &lt;header> is visible it sets style to
 </p>
 
 <h3>Example</h3>
-Please see an example of <a href="##ngd-image-drop">ngd-image-drop</a>.
+Please see an example of <a href="#ngd-image-drop">ngd-image-drop</a>.
 
 <!-- ========================================================= -->
 <!--           <div ng-include="'ngd-image-paste.html'"></div> -->
