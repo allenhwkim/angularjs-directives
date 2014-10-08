@@ -113,23 +113,23 @@ NGD.directive('ngdPlnkrEdit', function() {
 });
 
 NGD.directive('ngdPlnkrShow', ['$compile', '$timeout', function($compile, $timeout) {
-  var defaultTemplate = 
-    '<style>\n' +
+  var defaultStyle =
     '  .tabs {position: relative; top: 1px}\n' +
     '  .tabs::after {display:table; content:""; clear:both}\n' +
-    '  .tabs a {display:block; background:#ccc; float:left; padding: 5px; border:1px solid #333; border-bottom:none}\n' +
+    '  .tabs a {display:block; background:#ccc; float:left; padding: 5px; border:1px solid #ccc; border-bottom:none; border-radius: 4px 4px 0 0}\n' +
     '  .tabs a:not(:first-child) {border-left: none}\n' +
     '  .tabs a.hide {display:none}\n' +
     '  .tabs a.active {background: #fff;}\n' +
-    '  .tab-contents {border: 1px solid #333}\n' +
-    '  .tab-contents * {width: 100%; white-space: pre; font:0.9em Courier New; overflow:auto}\n' +
-    '</style>\n' +
+    '  .tabs a[ngd-plnkr-edit] { float: right; background: #5bc0de; color: white; border: 1px solid #fff; border-radius: 4px; font-size: 14px; padding-bottom: 4px;} ' +
+    '  .tab-contents {border: 1px solid #ccc; border-radius: 0 4px 4px 4px}\n' +
+    '  .tab-contents * {width: 100%; white-space: pre; font:0.9em Courier New; overflow:auto}\n' ;
+  var defaultTemplate = 
     '<div>\n' +
     '  <div class="tabs" ng-init="tab=1">\n' +
     '    <a ng-class="{active:tab==1,hide:!html}" ng-click="tab=1">HTML</a>\n' +
     '    <a ng-class="{active:tab==2,hide:!js}" ng-click="tab=2">Script</a>\n' +
     '    <a ng-class="{active:tab==3,hide:!css}" ng-click="tab=3">CSS</a>\n' +
-    '    <a href="#" ngd-plnkr-edit>Edit</a>\n' +
+    '    <a href="#" ngd-plnkr-edit>Edit in plunker</a>\n' +
     '  </div>\n' +
     '  <div class="tab-contents">\n' +
     '    <div ng-show="tab==1">{{html}}</div>\n' +
@@ -147,6 +147,12 @@ NGD.directive('ngdPlnkrShow', ['$compile', '$timeout', function($compile, $timeo
         scope.js = controller.js;
         scope.css= controller.css;
         if (!attrs.ngInclude) {  // if no template given from user, use default template
+          var styleTag = document.querySelector("head style#ngd-plnkr-css");
+          if (!styleTag) {
+            var head = document.querySelector("head");
+            var styleEl =angular.element("<style type='text/css' id='ngd-plnkr-css'>"+defaultStyle+"</style>");
+            head.appendChild(styleEl[0]);
+          }
           element.html(defaultTemplate);
           $compile(element.contents())(scope);
         }

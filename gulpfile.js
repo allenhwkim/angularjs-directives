@@ -68,7 +68,7 @@ gulp.task('docs', shell.task([
 ]));
 
 gulp.task('copy', function() {
-  return gulp.src('./build/ngd*')
+  return gulp.src(['./build/ngd.js', './build/ngd.min.js', './ngdPlnkr.js'])
     .pipe(gulp.dest('../gh-pages/javascripts'))
     .on("error", gutil.log);
 });
