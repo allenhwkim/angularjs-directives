@@ -11,10 +11,10 @@ NGD.directive('ngdList', function() {
       /**
        * set the default style of ngd-list if not defined
        */
-      var styleTag = document.querySelector("head style#ngd-list");
+      var styleTag = document.querySelector("head style#ngd-list-css");
       if (!styleTag) {
         var head = document.querySelector("head");
-        var styleEl =angular.element("<style type='text/css' id='ngd-list'>"+defaultStyle+"</style>");
+        var styleEl =angular.element("<style type='text/css' id='ngd-list-css'>"+defaultStyle+"</style>");
         head.appendChild(styleEl[0]);
       }
       
