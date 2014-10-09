@@ -31,10 +31,13 @@
   <div ngd-plnkr-show module-name="ngd"></div>
   <style ngd-plnkr-code="css">
     *[ngd-image-drop] {
-      color: #fff; width:400px; min-height: 200px; background: grey
+      color: #fff; width:400px; min-height: 200px; background: grey; float: left;
     }
     *[ngd-image-drop].dragover {
       color: grey; background: #fff; border: 1px solid #333;
+    }
+    *[ngd-image-drop] ~ img {
+      width: 100px;
     }
   </style>
   <div ngd-plnkr-code="html">
@@ -43,5 +46,13 @@
       ngd-image-preview-width="100">
       Drag Image Here
     </div>
+    <img src="http://upload.wikimedia.org/wikipedia/commons/5/58/1NumberOneInCircle.png" />
+    <img src="https://assets-cdn.github.com/assets/modules/dashboard/bootcamp/octocat_repo-cb1f4597a1bebe82fcc0b3ef76af56e21c8c7027.png" />
+    <img src="http://upload.wikimedia.org/wikipedia/commons/9/9f/2NumberTwoInCircle.png" />
+    <img src="https://assets-cdn.github.com/assets/modules/dashboard/bootcamp/octocat_setup-84f6371ecad812ad78859b234943b5c8152e7fdb.png" />
+    <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/3NumberThreeInCircle.svg/500px-3NumberThreeInCircle.svg.png" />
+    <img src="https://assets-cdn.github.com/assets/modules/dashboard/bootcamp/octocat_fork-1325df937c72b18d35596b0907063eb813ad685f.png" />
+    <img src="http://upload.wikimedia.org/wikipedia/commons/5/59/4NumberFourInCircle.png" />
+    <img src="https://assets-cdn.github.com/assets/modules/dashboard/bootcamp/octocat_collabocats-76ee6a3f54af5ba9b8c795aeb5c8dd4a4e8c279e.png" />
   </div>
 </div>
