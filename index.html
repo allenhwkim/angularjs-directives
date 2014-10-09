@@ -412,7 +412,8 @@ NOTE: when copy/paste, it must be copied as an image not as a file, i.e. screens
 </h2>
 
 <p>
-Provides a method called ngdMarkdown#show to the scope to preview markdown text inside an element
+Provides a method called ngdMarkdown#show to the scope to preview markdown text inside an element.
+In default, if there is `scope.markdown` defined, preview will be show with it.
 </p>
 
 <h3>Example</h3>
@@ -423,11 +424,11 @@ Provides a method called ngdMarkdown#show to the scope to preview markdown text 
   <div ngd-plnkr-lib src="https://rawgit.com/allenhwkim/angularjs-directives/master/ngd-markdown-preview.js" />
   <div ngd-plnkr-show></div>
   <div ngd-plnkr-code="html">
-    <div ng-init="markdown='Header\n======\nenter text to preview'">
+    <div ng-init="markdown='Random Image\n------------\n![](http://lorempixel.com/400/200)'">
        <textarea ng-model="markdown" rows="4" cols="50"
          ng-keydown="ngdMarkdown.preview('foo', markdown)">
        </textarea>
-       <div ngd-markdown="foo">
+       <div ngd-markdown="foo">  
          Markdown will be previewed here.
        </div>
     </div>
