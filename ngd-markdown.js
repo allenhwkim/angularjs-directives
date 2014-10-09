@@ -37,6 +37,9 @@ NGD.directive('ngdMarkdown', function() {
           }
         }
       };
+      if (scope.markdown) {
+        scope.ngdMarkdown.preview(markdownId, scope.markdown);
+      }
     }
   };
 });
