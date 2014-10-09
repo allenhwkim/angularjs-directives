@@ -13,7 +13,7 @@ NGD.directive('ngdPlnkrScope', function() {
         this.html = null;
         this.js = null;
         this.css = null;
-        this.libs = ["script.js", "style.css"];
+        this.libs = [];
         
         this.submitToPlnkr = function(postData) {
           var form = document.createElement('form');
@@ -42,6 +42,8 @@ NGD.directive('ngdPlnkrScope', function() {
           js = js.replace(/,[ '"]*plunkr['"]?/,'');
       
           var headTags = [];
+          this.libs.push("script.js");
+          this.libs.push("style.css");
           for (var i=0; i<this.libs.length; i++) {
             var url = this.libs[i];
             headTags.push(urlToHtmlTag(url));
