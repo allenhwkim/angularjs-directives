@@ -101,7 +101,7 @@ NGD.directive('ngdViewportNav', ['NgdViewport',
               var navEl = angular.element(links[i]);
               var navAttrVal = links[i].getAttribute(NgdViewport.attrToNav);
               var elAttrVal = currentEl.getAttribute(NgdViewport.attrToSpy);
-              if ( navAttrVal.match(new RegExp("#"+elAttrVal))) {
+              if ( navAttrVal.match(new RegExp("#"+elAttrVal+'$'))) {
                 navEl.addClass(NgdViewport.classForNav);
               } else {
                 navEl.removeClass(NgdViewport.classForNav);

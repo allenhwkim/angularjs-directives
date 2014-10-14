@@ -1,20 +1,21 @@
 var NGD = NGD || angular.module('ngd',[]);
-NGD.directive('ngdList', function() {
+NGD.directive('ngdTree', function() {
   var defaultStyle = 
-    'ul[ngd-list] li { list-style: none; }\n'+
-    'ul[ngd-list] li:not(.on) ul {  display: none; }\n'+
-    'ul[ngd-list] li:before { content: " "; display: inline-block; width: 20px;}\n'+
-    'ul[ngd-list] li.has-ul:before { content: "▸"; }\n'+
-    'ul[ngd-list] li.has-ul.on:before { content: "▾"; }\n';
+    'ul[ngd-tree] li { list-style: none; }\n'+
+    'ul[ngd-tree] li:not(.on) ul {  display: none; }\n'+
+    'ul[ngd-tree] li:before { content: " "; display: inline-block; width: 7%;}\n'+
+    'ul[ngd-tree] li a { display: inline-block; width: 90%;}\n'+
+    'ul[ngd-tree] li.has-ul:before { content: "▸"; }\n'+
+    'ul[ngd-tree] li.has-ul.on:before { content: "▾"; }\n';
   return {
     link: function(scope, element, attrs) {
       /**
-       * set the default style of ngd-list if not defined
+       * set the default style of ngd-tree if not defined
        */
-      var styleTag = document.querySelector("head style#ngd-list-css");
+      var styleTag = document.querySelector("head style#ngd-tree-css");
       if (!styleTag) {
         var head = document.querySelector("head");
-        var styleEl =angular.element("<style type='text/css' id='ngd-list-css'>"+defaultStyle+"</style>");
+        var styleEl =angular.element("<style type='text/css' id='ngd-tree-css'>"+defaultStyle+"</style>");
         head.appendChild(styleEl[0]);
       }
       

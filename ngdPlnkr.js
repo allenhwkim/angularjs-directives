@@ -1,6 +1,22 @@
 var NGD =  NGD || angular.module("ngd", []);
 
-NGD.directive('ngdPlnkrScope', function() {
+NGD.provider("PlnkrDefault", function() {
+  this.libs = [];
+  this.$get = function() {
+    var libs = this.libs;
+    return {
+      getLibs: function() {
+        return libs;
+      }
+    };
+  };
+
+  this.setLibs = function(libs) {
+    this.libs = libs;
+  };
+});
+
+NGD.directive('ngdPlnkrScope', function(PlnkrDefault) {
   var urlToHtmlTag = function(url) {
     var linkTag   = '<link rel="stylesheet" href="' + url + '"/>';
     var scriptTag = '<script src="' + url +'"></'+'script>';
@@ -13,7 +29,7 @@ NGD.directive('ngdPlnkrScope', function() {
         this.html = null;
         this.js = null;
         this.css = null;
-        this.libs = [];
+        this.libs = PlnkrDefault.getLibs();
         
         this.submitToPlnkr = function(postData) {
           var form = document.createElement('form');
@@ -73,15 +89,21 @@ NGD.directive('ngdPlnkrScope', function() {
   }; // return
 });
 
-NGD.directive('ngdPlnkrCode', function() {
+NGD.directive('ngdPlnkrCode', function($http) {
   return {
     require: '^ngdPlnkrScope',
     compile: function(el, attrs) {
       return {
         pre: function(scope, element, attrs, controller) {
           var key = attrs.ngdPlnkrCode;
-          var code = el.html();
-          controller[key] = code;
+          if (key ==="js" && attrs.src) {
+            $http.get(attrs.src).success(function(data) {
+              controller.js = data;
+            });
+          } else {
+            var code = el.html();
+            controller[key] = code;
+          }
         }
       };
     }
