@@ -2,7 +2,7 @@
  * To perform action when image is pasted to the document
  */
 var NGD = NGD || angular.module('ngd', []);
-NGD.directive("ngdImagePaste", function ($parse, $http) {
+NGD.directive("ngdImagePaste",['$parse', '$http', function($parse, $http) {
   return {
     restrict: "A",
     link: function (scope, element, attrs) {
@@ -27,5 +27,5 @@ NGD.directive("ngdImagePaste", function ($parse, $http) {
       }); // bind
     } // link
   }; // return
-});
+}]);
 

@@ -2,7 +2,7 @@
  * show unsaved changes warning on the form if changed and not submitted
  */
 var NGD = NGD || angular.module('ngd', []);
-NGD.directive('ngdFormUnsaved', function($window, $parse) {
+NGD.directive('ngdFormUnsaved',['$window', function($window) {
   return {
     restrict: 'A',
     require: 'form', // we must require form to get access to formController
@@ -24,4 +24,4 @@ NGD.directive('ngdFormUnsaved', function($window, $parse) {
       $window.onbeforeunload = onbeforeunloadFunc;
     } // link
   };
-});
+}]);

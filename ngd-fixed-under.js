@@ -3,7 +3,7 @@
  */
 var NGD = NGD || angular.module('ngd',[]);
 
-NGD.directive('ngdFixedUnder', function($window) {
+NGD.directive('ngdFixedUnder', ['$window', function($window) {
   return {
     restrict: 'A',
     link: function($scope, element, attrs) {
@@ -22,4 +22,4 @@ NGD.directive('ngdFixedUnder', function($window) {
       } // if
     } // link
   }; // return
-});
+}]);

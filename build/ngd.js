@@ -67,7 +67,7 @@ NGD.directive('ngdEnter', ['$parse', '$rootScope', function ($parse, $rootScope)
  */
 var NGD = NGD || angular.module('ngd',[]);
 
-NGD.directive('ngdFixedUnder', function($window) {
+NGD.directive('ngdFixedUnder', ['$window', function($window) {
   return {
     restrict: 'A',
     link: function($scope, element, attrs) {
@@ -86,13 +86,13 @@ NGD.directive('ngdFixedUnder', function($window) {
       } // if
     } // link
   }; // return
-});
+}]);
 
 /**
  * show unsaved changes warning on the form if changed and not submitted
  */
 var NGD = NGD || angular.module('ngd', []);
-NGD.directive('ngdFormUnsaved', function($window, $parse) {
+NGD.directive('ngdFormUnsaved',['$window', function($window) {
   return {
     restrict: 'A',
     require: 'form', // we must require form to get access to formController
@@ -114,7 +114,7 @@ NGD.directive('ngdFormUnsaved', function($window, $parse) {
       $window.onbeforeunload = onbeforeunloadFunc;
     } // link
   };
-});
+}]);
 
 /**
  * To perform action when image is dragged and dropped on and element
@@ -168,7 +168,7 @@ NGD.directive("ngdImageDrop", ['$parse', function ($parse) {
  * To perform action when image is pasted to the document
  */
 var NGD = NGD || angular.module('ngd', []);
-NGD.directive("ngdImagePaste", function ($parse, $http) {
+NGD.directive("ngdImagePaste",['$parse', '$http', function($parse, $http) {
   return {
     restrict: "A",
     link: function (scope, element, attrs) {
@@ -193,7 +193,7 @@ NGD.directive("ngdImagePaste", function ($parse, $http) {
       }); // bind
     } // link
   }; // return
-});
+}]);
 
 
 /**
