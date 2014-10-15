@@ -10,11 +10,12 @@ Deep-level collapsale list with 'ngd-tree' attribute. This directive does;
 <ol>
   <li>set the default style of ngd-tree if not set yet by adding the following css into the &lt;head> tag
     <pre><code ngd-code>
-      ul[ngd-tree] li { list-style: none;}
-      ul[ngd-tree] li:not(.on) ul {  display: none;}
-      ul[ngd-tree] li:before { content: " "; display: inline-block; width: 20px;}
-      ul[ngd-tree] li.has-ul:before { content: "▸";}
-      ul[ngd-tree] li.has-ul.on:before { content: "▾";};
+      ul[ngd-tree] li { list-style: none; }
+      ul[ngd-tree] li:not(.on) ul {  display: none; }
+      ul[ngd-tree] li:before { content: " "; display: inline-block; width: 7%;
+      ul[ngd-tree] li > * { display: inline-block; width: 90%; border-bottom: 1px solid #ddd}
+      ul[ngd-tree] li.has-ul:before { content: "▸"; }
+      ul[ngd-tree] li.has-ul.on:before { content: "▾"; }
     </code></pre>
   </li>
   <li>Find all &lt;li> element that has &ul>, then set "has-ul" class name
