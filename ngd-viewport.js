@@ -8,7 +8,7 @@ NGD.isElementIn = function(innerEl, outerEl) {
   (typeof jQuery === "function" && innerEl instanceof jQuery) && (innerEl = innerEl[0]);
   (typeof jQuery === "function" && outerEl instanceof jQuery) && (outerEl = outerEl[0]);
   var innerRect = innerEl.getBoundingClientRect();
-  if (outerEl.constructor.name == "Window") {
+  if (outerEl instanceof Window || outerEl.constructor.name == "Window") {
     return (
       innerRect.top >= 0 && innerRect.left >= 0 &&
       innerRect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && 
@@ -56,7 +56,11 @@ NGD.directive('ngdViewport', ['$window', 'NgdViewport',
           var viewportEl = elementsToSpy[i];
           var viewportElAttr = viewportEl.getAttribute(NgdViewport.attrToSpy);
           if (viewportElAttr) {
-            NgdViewport.elements[viewportElAttr] = viewportEl; 
+            if (NgdViewport.elements[viewportElAttr]) { // already added
+              console.log('id', viewportElAttr, 'is already added to ngd-viewport');
+            } else {
+              NgdViewport.elements[viewportElAttr] = viewportEl; 
+            }
           } else {
             throw "requires value in attribute, "+NgdViewport.selectorToSpy+" in ng-viewport";
           }
@@ -135,7 +139,11 @@ NGD.directive('ngdViewportEl', ['NgdViewport',
     return {
       link: function(scope, element, attrs) {
         var id = ((""+attrs.ngdViewportEl) === "")? attrs.id : attrs.ngdViewportEl;
-        NgdViewport.elements[id] = element[0];
+        if (NgdViewport.elements[id]) { // already added
+          console.log('id', id, 'is already added to ngd-viewport');
+        } else {
+          NgdViewport.elements[id] = element[0];
+        }
       }
     };
   }
