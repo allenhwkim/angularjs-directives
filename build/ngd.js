@@ -409,10 +409,11 @@ NGD.directive('ngdOverlay', ['$compile', '$window', function($compile, $window) 
 var NGD = NGD || angular.module('ngd',[]);
 NGD.directive('ngdTree', function() {
   var defaultStyle = 
+    'ul[ngd-tree] ul { margin:0px }\n'+
     'ul[ngd-tree] li { list-style: none; }\n'+
     'ul[ngd-tree] li:not(.on) ul {  display: none; }\n'+
     'ul[ngd-tree] li:before { content: " "; display: inline-block; width: 7%;}\n'+
-    'ul[ngd-tree] li > * { display: inline-block; width: 90%; border-bottom: 1px solid #ddd}\n'+
+    'ul[ngd-tree] li > *:not(ul) { display: inline-block; width: 90%; border-bottom: 1px solid #ddd}\n'+
     'ul[ngd-tree] li.has-ul:before { content: "▸"; }\n'+
     'ul[ngd-tree] li.has-ul.on:before { content: "▾"; }\n';
   return {
