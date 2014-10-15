@@ -68,7 +68,7 @@
             </ul>
           </li>
           <li><a href="#ngd-form-unsaved">ngd-form-unsaved</a></li>
-          <li><a href="#ngd-list">ngd-list</a></li>
+          <li><a href="#ngd-tree">ngd-tree</a></li>
         </ul>
       </p>
 
@@ -97,7 +97,7 @@
               <li><a href="#ngd-overlay">ngd-overlay</a> modal blocker for any element</li>
               <li><a href="#ngd-viewport">ngd-viewport</a> navigation tracking for current viewport</li>
               <li><a href="#ngd-form-unsaved">ngd-form-unsaved</a> warning message when form not saved</li>
-              <li><a href="#ngd-list">ngd-list</a> Deep-level collapsale list presentation</li>
+              <li><a href="#ngd-tree">ngd-tree</a> Deep-level collapsale list presentation</li>
             </ul>
           </p>
 
@@ -628,25 +628,25 @@ Shows a warning message for the form when leaves the current page without submit
 </div>
 
 <!-- ================================================== -->
-<!--           <div ng-include="'ngd-list.html'"></div> -->
+<!--           <div ng-include="'ngd-tree.html'"></div> -->
 <!-- ================================================== -->
-<a id="ngd-list" ngd-viewport-el></a> 
+<a id="ngd-tree" ngd-viewport-el></a> 
 <h2>
-  ngd-list
+  ngd-tree
   <a href="https://rawgit.com/allenhwkim/angularjs-directives/master/ngd-list.js" download="ngd-list.js">Download</a>
   <a href="https://github.com/allenhwkim/angularjs-directives/blob/master/ngd-list.js">Source</a>
 </h2>
 
 <p>
-Deep-level collapsale list with 'ngd-list' attribute. This directive does;
+Deep-level collapsale list with 'ngd-tree' attribute. This directive does;
 <ol>
-  <li>set the default style of ngd-list if not set yet by adding the following css into the &lt;head> tag
+  <li>set the default style of ngd-tree if not set yet by adding the following css into the &lt;head> tag
     <pre><code ngd-code>
-      ul[ngd-list] li { list-style: none;}
-      ul[ngd-list] li:not(.on) ul {  display: none;}
-      ul[ngd-list] li:before { content: " "; display: inline-block; width: 20px;}
-      ul[ngd-list] li.has-ul:before { content: "▸";}
-      ul[ngd-list] li.has-ul.on:before { content: "▾";};
+      ul[ngd-tree] li { list-style: none;}
+      ul[ngd-tree] li:not(.on) ul {  display: none;}
+      ul[ngd-tree] li:before { content: " "; display: inline-block; width: 20px;}
+      ul[ngd-tree] li.has-ul:before { content: "▸";}
+      ul[ngd-tree] li.has-ul.on:before { content: "▾";};
     </code></pre>
   </li>
   <li>Find all &lt;li> element that has &ul>, then set "has-ul" class name
@@ -657,10 +657,10 @@ Deep-level collapsale list with 'ngd-list' attribute. This directive does;
 <h3>Example</h3>
 <div ngd-plnkr-scope>
   <div ngd-plnkr-lib src="http://code.angularjs.org/1.2.25/angular.js" />
-  <div ngd-plnkr-lib src="https://rawgit.com/allenhwkim/angularjs-directives/master/ngd-list.js" />
+  <div ngd-plnkr-lib src="https://rawgit.com/allenhwkim/angularjs-directives/master/ngd-tree.js" />
   <div ngd-plnkr-show module-name="ngd"></div>
   <div ngd-plnkr-code="html">
-    <ul ngd-list>
+    <ul ngd-tree>
       <li>a
         <ul>
           <li>a-1</li>
