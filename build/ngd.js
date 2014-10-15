@@ -412,7 +412,7 @@ NGD.directive('ngdTree', function() {
     'ul[ngd-tree] li { list-style: none; }\n'+
     'ul[ngd-tree] li:not(.on) ul {  display: none; }\n'+
     'ul[ngd-tree] li:before { content: " "; display: inline-block; width: 7%;}\n'+
-    'ul[ngd-tree] li a { display: inline-block; width: 90%;}\n'+
+    'ul[ngd-tree] li > * { display: inline-block; width: 90%; border-bottom: 1px solid #ddd}\n'+
     'ul[ngd-tree] li.has-ul:before { content: "▸"; }\n'+
     'ul[ngd-tree] li.has-ul.on:before { content: "▾"; }\n';
   return {
@@ -442,8 +442,11 @@ NGD.directive('ngdTree', function() {
        * attach click event listener for on/off collapsing
        */
       element.find("li").on("click", function(event) {
-        angular.element(this).toggleClass("on");
-        event.stopPropagation();
+        var targetEl = angular.element(event.target);
+        if (targetEl.prop('tagName') == "LI" && targetEl.hasClass("has-ul")) { 
+          angular.element(this).toggleClass("on");
+          event.stopPropagation();
+        }
       });
     }
   };
