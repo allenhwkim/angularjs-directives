@@ -167,7 +167,7 @@ NGD.directive('ngdPlnkrShow', ['$compile', '$timeout', function($compile, $timeo
     link: function(scope, element, attrs, controller) {
       $timeout(function() { //give some time to read html code when it comes after this directive
         controller.moduleName = attrs.moduleName;
-        scope.html= controller.html;
+        scope.html= controller.html.replace(/(init-event|style)=['"][^'"]+['"]\s?/g,"");
         scope.js = controller.js;
         scope.css= controller.css;
         if (!attrs.ngInclude) {  // if no template given from user, use default template

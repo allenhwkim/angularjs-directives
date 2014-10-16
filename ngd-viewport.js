@@ -27,6 +27,7 @@ NGD.isElementIn = function(innerEl, outerEl) {
 
 NGD.service('NgdViewport', function() {
   return { 
+    currentId: null, 
     currentEl: null, 
     elements : {},
     selectorToSpy: null,
@@ -71,6 +72,7 @@ NGD.directive('ngdViewport', ['$window', 'NgdViewport',
             var innerEl = NgdViewport.elements[key];
             if (NGD.isElementIn(innerEl, outerEl)) {
               NgdViewport.currentEl = innerEl;
+              NgdViewport.currentId = innerEl.getAttribute(NgdViewport.attrToSpy);
               scope.$apply();
               break;
             }
