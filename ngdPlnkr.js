@@ -2,17 +2,24 @@ var NGD =  NGD || angular.module("ngd", []);
 
 NGD.provider("PlnkrDefault", function() {
   this.libs = [];
+  this.appJs = null;
   this.$get = function() {
     var libs = this.libs;
+    var appJs = this.appJs;
     return {
       getLibs: function() {
         return libs;
+      },
+      getAppJs: function() {
+        return appJs;
       }
     };
   };
-
   this.setLibs = function(libs) {
     this.libs = libs;
+  };
+  this.setAppJs= function(jsCode) {
+    this.appJs = jsCode;
   };
 });
 
@@ -55,7 +62,6 @@ NGD.directive('ngdPlnkrScope', function(PlnkrDefault) {
           var js  = this.js||'';
           var css = this.css;
           var appName = this.moduleName;
-          js = js.replace(/,[ '"]*plunkr['"]?/,'');
       
           var headTags = [];
           this.libs.push("script.js");
@@ -89,20 +95,41 @@ NGD.directive('ngdPlnkrScope', function(PlnkrDefault) {
   }; // return
 });
 
-NGD.directive('ngdPlnkrCode', function($http) {
+NGD.directive('ngdPlnkrCode', function($http, PlnkrDefault) {
   return {
     require: '^ngdPlnkrScope',
     compile: function(el, attrs) {
       return {
         pre: function(scope, element, attrs, controller) {
           var key = attrs.ngdPlnkrCode;
-          if (key ==="js" && attrs.src) {
-            $http.get(attrs.src).success(function(data) {
-              controller.js = data;
-            });
+          var prependAppJs = function(jsCode) {
+            /**
+             * if js code does not have 'var app=', add one 
+             */
+            if (!jsCode.match(/var[ ]+app[ ]*=/) && PlnkrDefault.getAppJs()) { 
+              jsCode = PlnkrDefault.getAppJs() + "\n" + jsCode;
+            }
+            return jsCode;
+          };
+          if (key ==="js") {
+            if (attrs.src) { //js code not in html, but in url
+              $http.get(attrs.src).success(function(data) {
+                controller.js = data;
+                controller.js = prependAppJs(controller.js);
+              });
+            } else {
+              controller.js = el.html();
+              controller.js = prependAppJs(controller.js);
+            }
           } else {
             var code = el.html();
-            code = code.replace(/(init-event|style)=['"][^'"]+['"]\s?/g,"");
+            /**
+             * remove special attrs, init-event and style 
+             * TODO: this can be configured
+             */
+            if (key == "html") { 
+              code = code.replace(/(init-event|style)=['"][^'"]+['"]\s?/g,"");
+            }
             controller[key] = code;
           }
         }
