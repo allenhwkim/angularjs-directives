@@ -31,6 +31,13 @@ NGD.directive('ngdPlnkrScope', function(PlnkrDefault) {
   };
 
   return {
+    transclude: true,
+    scope: {}, //isolate the scope to have its own
+    link: function(scope, element, attrs, ctrl, transclude) {
+      transclude(scope, function(clone) {
+       element.append(clone);
+      });
+    },
     controller: ['$scope', 
       function($scope) {
         this.html = null;
@@ -190,7 +197,6 @@ NGD.directive('ngdPlnkrShow', ['$compile', '$timeout', function($compile, $timeo
     '  </div>\n' +
     '</div>';
   return {
-    scope: {}, //isolate the scope to have its own
     require: '^ngdPlnkrScope',
     link: function(scope, element, attrs, controller) {
       $timeout(function() { //give some time to read html code when it comes after this directive
