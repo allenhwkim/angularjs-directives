@@ -68,7 +68,7 @@ NGD.directive('ngdPlnkrScope', function(PlnkrDefault) {
           this.libs.push("style.css");
           for (var i=0; i<this.libs.length; i++) {
             var url = this.libs[i];
-            headTags.push(urlToHtmlTag(url));
+            url && headTags.push(urlToHtmlTag(url));
           }
       
           var postData = {};
@@ -128,7 +128,7 @@ NGD.directive('ngdPlnkrCode', function($http, PlnkrDefault) {
              * TODO: this can be configured
              */
             if (key == "html") { 
-              code = code.replace(/(init-event|style)=['"][^'"]+['"]\s?/g,"");
+              code = code.replace(/\ (init-event|style)=['"][^'"]+['"]/g,"");
             }
             controller[key] = code;
           }
