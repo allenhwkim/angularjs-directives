@@ -2,16 +2,16 @@
  * Set the height of textarea automatically by the height of contents
  */
 var NGD = NGD || angular.module('ngd',[]);
-NGD.directive('ngdAutoHeight', function() {
+NGD.directive('ngdAutoHeight', function($timeout) {
   return {
     restrict: 'A',
     link: function($scope, elem) {
-      setTimeout( function() { // Expand the textarea as soon as it is added to the DOM
-        if ( elem.val() ) {
+      $timeout( function() { // Expand the textarea as soon as it is added to the DOM
+        if ( elem.html() ) {
           var height = elem[0].scrollHeight;
           elem.css({height:height+'px'});
         }
-      }, 0);
+      }, 100);
     }
   };
 });
@@ -87,6 +87,29 @@ NGD.directive('ngdFixedUnder', ['$window', function($window) {
     } // link
   }; // return
 }]);
+
+var NGD = NGD || angular.module('ngd',[]);
+NGD.factory('NgdFlash', function($window) {
+  return {
+    push: function(msg) {
+      $window.sessionStorage.ngdFlashMessage = msg;
+    },
+    pull: function() {
+      var msg = $window.sessionStorage.ngdFlashMessage;
+      (msg) && (delete $window.sessionStorage.ngdFlashMessage);
+      return msg;
+    }
+  }
+});
+NGD.directive('ngdFlash', function(NgdFlash) {
+  return {
+    restrict: 'A',
+    link: function($scope, elem, attrs) {
+      var msg = NgdFlash.pull();
+      elem.html(msg);
+    }
+  };
+});
 
 /**
  * show unsaved changes warning on the form if changed and not submitted
@@ -250,37 +273,33 @@ NGD.directive("ngdImagePreview", function() {
  *  ======
  *  *italic*
  *  </textarea>
- *  <a href="" ng-click="ngdMarkdown.preview('foo',markdown)">Preview</a>
- *  <div ngd-markdown="foo">
+ *  <a href="" ng-click="markdownPreview.convert(markdown)">Preview</a>
+ *  <div ngd-markdown-preview>
  *    Markdown preview goes here
  *  </div>
  */
+if(!Markdown.Converter) {
+  var scriptEl = document.createElement('script');
+  scriptEl.src = "http://cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Converter.js";
+  document.head.appendChild(scriptEl);
+}
 var NGD = NGD || angular.module('ngd', []);
-NGD.directive('ngdMarkdown', function() {
-  if (!Markdown.Converter) {
-    throw "no Markdown.Converter.js included. please add "+
-      "script tag with \"http://cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Converter.js\"";
-  }
-  var converter = new Markdown.Converter();
+NGD.directive('ngdMarkdownPreview', function() {
   return {
     link: function(scope, element, attrs) {
-      scope.markdowns = scope.markdowns || {};
-      var markdownId = attrs.ngdMarkdown;
-      scope.markdowns[markdownId] = element;
-      scope.ngdMarkdown = {
-        preview: function(elKey, txt) {
-          var previewEl = scope.markdowns[elKey];
-          if (previewEl) {
-            var markdown = txt || '';
-            var html = converter.makeHtml(markdown);
-            angular.element(previewEl).html(html);
-          } else {
-            throw "no markdown element found by key, "+ elKey;
-          }
-        }
-      };
-      if (scope.markdown) {
-        scope.ngdMarkdown.preview(markdownId, scope.markdown);
+      var converter = new Markdown.Converter();
+      element[0].convert = function(markdown) {
+        markdown = markdown || element.html();
+        var html = converter.makeHtml(markdown);
+        element[0].innerHTML = html;
+      }
+      element[0].convert();
+
+      scope.markdownPreviews = scope.markdownPreviews || {};
+      if (attrs.id) {
+        scope.markdownPreviews[attrs.id] = element[0];
+      } else {
+        scope.markdownPreview = element[0];
       }
     }
   };
@@ -405,6 +424,37 @@ NGD.directive('ngdOverlay', ['$compile', '$window', function($compile, $window) 
     } // link
   }; // return
 }]);
+
+var NGD = NGD || angular.module('ngd',[]);
+NGD.directive('ngdScript', function($http) {
+  return {
+    restrict: 'E',
+    link: function(scope, elem, attrs) {
+console.log('attrs', attrs);
+      if (attrs.src && attrs.scopeVar) {// read src, then assign to a variable
+console.log('attrs1', attrs);
+        $http.get(attrs.src)
+          .success(function(data) {
+console.log('attrs2', 'data', data);
+            scope[attrs.scopeVar] = data;
+          }).error( function() {
+            console.error("Failed to read "+attrs.src);
+          });
+      } else {
+        var scriptEl = document.createElement("script");
+        scriptEl.type = "text/javascript";                
+        if (attrs.src) {           // add <script> to <head>
+          scriptEl = attrs.src;
+        } else {
+          var code = elem.text();
+          scriptEl.text = code;
+        }
+        document.head.appendChild(scriptEl);
+      }
+      elem.remove();
+    } // link
+  };
+});
 
 var NGD = NGD || angular.module('ngd',[]);
 NGD.directive('ngdTree', function() {
