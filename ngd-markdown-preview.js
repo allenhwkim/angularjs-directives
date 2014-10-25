@@ -13,7 +13,7 @@
  *    Markdown preview goes here
  *  </div>
  */
-if(!Markdown || !Markdown.Converter) {
+if(typeof Markdown === "undefined") {
   var scriptEl = document.createElement('script');
   scriptEl.src = "http://cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Converter.js";
   document.head.appendChild(scriptEl);
