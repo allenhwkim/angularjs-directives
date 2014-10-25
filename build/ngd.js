@@ -278,7 +278,7 @@ NGD.directive("ngdImagePreview", function() {
  *    Markdown preview goes here
  *  </div>
  */
-if(!Markdown.Converter) {
+if(!Markdown || !Markdown.Converter) {
   var scriptEl = document.createElement('script');
   scriptEl.src = "http://cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Converter.js";
   document.head.appendChild(scriptEl);
