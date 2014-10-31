@@ -1,0 +1,32 @@
+<a id="ngd-markdown" ngd-viewport-el></a> 
+<h2>
+  ngd-markdown
+  <a href="//rawgit.com/allenhwkim/ngd/master/ngd-markdown-preview.js" download="ngd-markdown-preview.js">Download</a>
+  <a href="//github.com/allenhwkim/ngd/blob/master/ngd-markdown-preview.js">Source</a>
+</h2>
+
+<ul>
+  <li>It provides a method called #convert to the element.  
+  <li>It provides a method, convertMarkdown(id, str), to the scope.  
+  <li>In default, if `$scope.markdown` defined, preview will be shown with it.
+</ul>
+
+<h3>Example</h3>
+<!-- plnkr: //plnkr.co/edit/YaIPKqaLUAK5oKUHNBqw?p=preview -->
+<div ngd-plnkr-scope>
+  <div ngd-plnkr-lib src="//code.angularjs.org/1.2.25/angular.js" />
+  <div src="//cdnjs.cloudflare.com/ajax/libs/pagedown/1.0/Markdown.Converter.js"></div>
+  <div ngd-plnkr-lib src="//rawgit.com/allenhwkim/ngd/master/ngd-markdown-preview.js" />
+  <div ngd-plnkr-show></div>
+  <div ngd-plnkr-code="html">
+    <div ng-init="markdown='Random Image\n------------\n![](http://lorempixel.com/400/200)'">
+       <textarea ng-model="markdown" rows="4" cols="50"
+         ng-keydown="convertMarkdown('foo', markdown)">
+       </textarea>
+       <div ngd-markdown-preview id="foo">  
+         Markdown will be previewed here.
+       </div>
+    </div>
+   </div>
+  </div>
+</div>
