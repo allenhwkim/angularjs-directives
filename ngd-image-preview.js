@@ -6,10 +6,18 @@ NGD.directive("ngdImagePreview", function() {
   return {
     restrict: "A",
     link: function (scope, element, attrs) {
+
+      element.attr('draggable', true); // so that, we can remove it
+      element.bind('dragleave', function(e)  {
+        if (e.target.tagName == "IMG") {
+          e.target.parentNode.removeChild(e.target);
+        }
+      });
+
       scope.$on('ngd-image-dropped', function(event, options) {
         var getImage = function(src) {
           var width = attrs.ngdImagePreviewWidth || attrs.width;
-          var height = attrs.ngdImagePreiewHeight || attrs.height;
+          var height = attrs.ngdImagePreviewHeight || attrs.height;
           var image = new Image();
           image.src = src;
           width && (image.width = width);
