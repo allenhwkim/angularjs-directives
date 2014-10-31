@@ -33,9 +33,8 @@ NGD.directive('ngdMarkdownPreview', function() {
       scope.markdownPreviews = scope.markdownPreviews || {};
       if (attrs.id) {
         scope.markdownPreviews[attrs.id] = element[0];
-      } else {
-        scope.markdownPreview = element[0];
       }
+      scope.markdownPreview = element[0];
     }
   };
 });

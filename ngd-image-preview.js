@@ -8,8 +8,8 @@ NGD.directive("ngdImagePreview", function() {
     link: function (scope, element, attrs) {
       scope.$on('ngd-image-dropped', function(event, options) {
         var getImage = function(src) {
-          var width = attrs.ngdImagePreviewWidth;
-          var height = attrs.ngdImagePreiewHeight;
+          var width = attrs.ngdImagePreviewWidth || attrs.width;
+          var height = attrs.ngdImagePreiewHeight || attrs.height;
           var image = new Image();
           image.src = src;
           width && (image.width = width);
