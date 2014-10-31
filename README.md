@@ -1,7 +1,7 @@
-angularjs-directives
-====================
+ngd
+===
 
-Collection of angularjs directives
+Angularjs directivesfocused on HTML
 
 Principles of `ngd`
   
@@ -12,4 +12,4 @@ Principles of `ngd`
 
 For bower users, `bower install ngd`
 
-Please see [the github page](http://allenhwkim.github.io/angularjs-directives) for usage.
+Please see [the github page](http://allenhwkim.github.io/ngd) for usage.
