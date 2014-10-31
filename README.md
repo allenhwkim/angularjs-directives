@@ -7,10 +7,10 @@ As the same way [ngmap](//allenhwkim.github.com/angularjs-google-maps) does, htm
 
 Principles of `ngd`
   
-  # html first
-    ## without looking at javascript code, you should be able to understand what's going on.
-  # and, html first
-  # finally, html first
+1. html-first  
+   without looking at javascript code, you should be able to understand what's going on.
+2. and, html-first
+3. finally, html-first
 
 For bower users, `bower install ngd`
 
