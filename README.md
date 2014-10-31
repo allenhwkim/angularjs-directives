@@ -1,7 +1,9 @@
 ngd
 ===
 
-Angularjs directivesfocused on HTML
+Angularjs directives focused on HTML
+
+As the same way [ngmap](//allenhwkim.github.com/angularjs-google-maps) does, html tag and attributeevery should be enough to peroform simple DOM change, without using any javascript.
 
 Principles of `ngd`
   
