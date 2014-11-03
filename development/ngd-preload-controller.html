@@ -1,0 +1,45 @@
+<a id="ngd-preload-controller" ngd-viewport-el></a> 
+<h2>
+  ngd-preload-controller
+  <a href="//rawgit.com/allenhwkim/ngd/master/ngd-preload-controller.js" download="ngd-preload-controller.js">Download</a>
+  <a href="//github.com/allenhwkim/ngd/blob/master/ngd-preload-controller.js">Source</a>
+</h2>
+
+<p>
+        When your partial has &lt;script src="partial-controller.js">&lt;/scipt> 
+  <br/> and your partial is loaded by ng-include, it will have an error
+  <br/> 
+  <br/> When &lt;script> is inside ng-include, it executes, but not before you need it.
+  <br/> Having `ngd-preload-controller` in script tag, it will load &lt;script> part first
+  <br/> 
+
+  How?
+  <ul>
+    <li> It extracts &lt;script> tag into &lt;head> if not already added
+    <li> Then, wait for 0.5 seconds, 
+    <li> then, return the response without the &lt;script> tag
+  </ul>
+</p>
+
+<h3>The following code will give you an error</h3>
+because 'MyCtrl' is not loaded although it is defined in `javascripts/ngd-preload-controller.js`.
+<pre><code>
+  &lt;script src="javascripts/ngd-preload-controller.js">&lt;/script>
+  &lt;div ng-controller="MyCtrl">
+    message: {{message}}
+  &lt;/div>
+</code></pre>
+
+<h3>The following code will NOT give you an error</h3>
+because &lt;script> tag is pre-loaded.
+<div ngd-plnkr-scope>
+  <div ngd-plnkr-lib src="//code.angularjs.org/1.2.25/angular.js" />
+  <div ngd-plnkr-lib src="//rawgit.com/allenhwkim/ngd/master/ngd-preload-controller.js" />
+  <div ngd-plnkr-show module-name="ngd"></div>
+  <div ngd-plnkr-code="html">
+    <script src="javascripts/ngd-preload-controller.js" ngd-preload-controller></script>
+    <div ng-controller="MyCtrl">
+      message: {{message}}
+    </div>
+  </div>
+</div>

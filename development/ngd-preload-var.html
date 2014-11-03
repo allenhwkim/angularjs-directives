@@ -1,0 +1,35 @@
+<a id="ngd-preload-var" ngd-viewport-el></a> 
+<h2>
+  ngd-preload-var
+  <a href="//rawgit.com/allenhwkim/ngd/master/ngd-preload-var.js" download="ngd-preload-var.js">Download</a>
+  <a href="//github.com/allenhwkim/ngd/blob/master/ngd-preload-var.js">Source</a>
+</h2>
+
+<p>
+  AJAX url is not a javascript but a JSON, <br/>
+  Thus, we cannot use AJAX get url with &lt;script> tag. It just perform empty action.<br/>
+  <br/>
+  "ngd-preload-var" assigns &lt;script> contents to a scope variable.<br/>
+</p>
+
+<h3>Example without using ngd-preload-var</h3>
+<div ngd-plnkr-scope>
+  <div ngd-plnkr-lib src="//code.angularjs.org/1.2.25/angular.js" />
+  <div ngd-plnkr-lib src="//rawgit.com/allenhwkim/ngd/master/ngd-preload-var.js" />
+  <div ngd-plnkr-show module-name="ngd"></div>
+  <div ngd-plnkr-code="html">
+    <script type="text/json" src="javascripts/ngd-preload-var.json"></script>
+    foo: {{foo}}
+  </div>
+</div>
+
+<h3>Example with using ngd-preload-var</h3>
+<div ngd-plnkr-scope>
+  <div ngd-plnkr-lib src="//code.angularjs.org/1.2.25/angular.js" />
+  <div ngd-plnkr-lib src="//rawgit.com/allenhwkim/ngd/master/ngd-preload-var.js" />
+  <div ngd-plnkr-show module-name="ngd"></div>
+  <div ngd-plnkr-code="html">
+    <script  type="text/json" src="javascripts/ngd-preload-var.json" ngd-preload-var="foo"></script>
+    foo: {{foo}}
+  </div>
+</div>

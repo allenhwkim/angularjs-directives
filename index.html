@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="ngd">
   <head>
+    <title>Angularjs-directives by allenhwkim</title>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -12,8 +13,7 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <title>Angularjs-directives by allenhwkim</title>
-    <script src="//code.angularjs.org/1.2.5/angular.js"></script>
+    <script src="//code.angularjs.org/1.2.26/angular.js"></script>
 
     <script src="//rawgit.com/allenhwkim/ngd/master/build/ngd.js"></script>
     <script src="//rawgit.com/allenhwkim/ngd/master/ngdPlnkr.js"></script>
@@ -69,6 +69,7 @@
           </li>
           <li><a href="#ngd-form-unsaved">ngd-form-unsaved</a></li>
           <li><a href="#ngd-tree">ngd-tree</a></li>
+          <li><a href="#ngd-preload-var">ngd-preload-var</a></li>
         </ul>
       </p>
 
@@ -98,6 +99,7 @@
               <li><a href="#ngd-viewport">ngd-viewport</a> navigation tracking for current viewport</li>
               <li><a href="#ngd-form-unsaved">ngd-form-unsaved</a> warning message when form not saved</li>
               <li><a href="#ngd-tree">ngd-tree</a> Deep-level collapsale list presentation</li>
+              <li><a href="#ngd-preload-var">ngd-preload-var</a> Assign script JSON to a scope variable</li>
             </ul>
           </p>
 
@@ -691,6 +693,45 @@ Deep-level collapsale list with 'ngd-tree' attribute. This directive does;
       </li>
       <li>d </li>
     </ul>
+  </div>
+</div>
+
+<!-- ========================================================= -->
+<!--           <div ng-include="'ngd-preload-var.html'"></div> -->
+<!-- ========================================================= -->
+<a id="ngd-preload-var" ngd-viewport-el></a> 
+<h2>
+  ngd-preload-var
+  <a href="//rawgit.com/allenhwkim/ngd/master/ngd-preload-var.js" download="ngd-preload-var.js">Download</a>
+  <a href="//github.com/allenhwkim/ngd/blob/master/ngd-preload-var.js">Source</a>
+</h2>
+
+<p>
+  AJAX url is not a javascript but a JSON, <br/>
+  Thus, we cannot use AJAX get url with &lt;script> tag. It just perform empty action.<br/>
+  <br/>
+  "ngd-preload-var" assigns &lt;script> contents to a scope variable.<br/>
+</p>
+
+<h3>Example without using ngd-preload-var</h3>
+<div ngd-plnkr-scope>
+  <div ngd-plnkr-lib src="//code.angularjs.org/1.2.25/angular.js" />
+  <div ngd-plnkr-lib src="//rawgit.com/allenhwkim/ngd/master/ngd-preload-var.js" />
+  <div ngd-plnkr-show module-name="ngd"></div>
+  <div ngd-plnkr-code="html">
+    <script type="text/json" src="javascripts/ngd-preload-var.json"></script>
+    foo: {{foo}}
+  </div>
+</div>
+
+<h3>Example with using ngd-preload-var</h3>
+<div ngd-plnkr-scope>
+  <div ngd-plnkr-lib src="//code.angularjs.org/1.2.25/angular.js" />
+  <div ngd-plnkr-lib src="//rawgit.com/allenhwkim/ngd/master/ngd-preload-var.js" />
+  <div ngd-plnkr-show module-name="ngd"></div>
+  <div ngd-plnkr-code="html">
+    <script  type="text/json" src="javascripts/ngd-preload-var.json" ngd-preload-var="foo"></script>
+    foo: {{foo}}
   </div>
 </div>
 
